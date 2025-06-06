@@ -5,11 +5,12 @@ import logo from "@/public/images/logo.svg"
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { User, userRegister, userSignin } from '@/redux/usersSlice'
-import { AppDispatch } from '@/redux/store'
 import { IsLogin, UserLoginContext } from '@/contexts/IsUserLogin'
 import { useRouter } from "next/navigation";
 import swal from 'sweetalert'
-import { RootState } from '@reduxjs/toolkit/query'
+import { RootState } from '@/redux/store'
+import { AppDispatch } from '@/redux/store'
+
 export type FormModal = {
   formTitle: string;
   switchPage: string;
@@ -28,8 +29,8 @@ export type FormModalProps = {
 const FormModal: React.FC<FormModalProps> = ({ formTitle, switchPage, linkHref, linkContent, formAction }) => {
   const router = useRouter()
   const isLoginContext = useContext<UserLoginContext | null>(IsLogin)
-  const loginResponse = useSelector((state: any) => state.users);
-  const dispatch = useDispatch<AppDispatch>()
+  const loginResponse = useSelector((state: RootState) => state.users);
+  const dispatch : AppDispatch = useDispatch<AppDispatch>()
   const [loginFormInfo, setLoginFormInfo] = useState<User>({ email: "", password: "" })
 
 
@@ -144,8 +145,8 @@ const FormModal: React.FC<FormModalProps> = ({ formTitle, switchPage, linkHref, 
         </p>
       </div>
       <span dir='rtl' className='mt-5' > ایمیل و پسورد فیک API : </span>
-      <span dir='ltr'> "email": "eve.holt@reqres.in",
-        "password": "pistol"</span>
+   <span dir="ltr">{`"email": "eve.holt@reqres.in", "password": "pistol"`}</span>
+
     </div>
   )
 }

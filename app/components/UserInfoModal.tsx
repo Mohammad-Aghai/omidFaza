@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 
 interface UserData {
-  id: number;
+  id: number | string;
   email: string;
   first_name: string;
   last_name: string;

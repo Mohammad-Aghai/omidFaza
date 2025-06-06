@@ -38,7 +38,7 @@ const columns: readonly Column[] = [
   { id: "عملیات", label: "عملیات", minWidth: 170, align: "right" },
 ];
 export interface UserData {
-  id: number;
+  id: number | string;
   email: string;
   first_name: string;
   last_name: string;
@@ -86,7 +86,7 @@ export const Users = () => {
         icon: "error",
       });
     }
-  }, [])
+  },  [dispatch, LoginContext, router, usersData?.error]); 
   //mui table logic
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(2); // Show 2 users per page
@@ -111,7 +111,7 @@ const handleUserUpdate = (updatedUser: UserData) => {
    dispatch(updateUserLocally(updatedUser)); 
 };
 //delete
-  const handleDelete = (userId: number) => {
+  const handleDelete = (userId: number  | string) => {
     dispatch(deleteUser(userId))
     dispatch(deleteUserLocally(userId));
   };

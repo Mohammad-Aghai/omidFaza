@@ -11,51 +11,56 @@ import { UserData } from "./Users";
 interface EditUserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  userDetails: UserData;
+  userDetails?: UserData; // تغییر نوع داده برای جلوگیری از `undefined` اولیه
   onSubmit: (updatedUser: UserData) => void;
 }
 
 const UserEditModal: React.FC<EditUserModalProps> = ({ isOpen, onClose, userDetails, onSubmit }) => {
-  if (!userDetails) return null;
-
+  
+  // ✅ ابتدا هوک‌ها را فراخوانی می‌کنیم
   const [editFormData, setEditFormData] = useState<UserData>({
-    id: userDetails.id,
-    email: userDetails.email,
-    first_name: userDetails.first_name,
-    last_name: userDetails.last_name,
-    avatar: userDetails.avatar,
+    id: userDetails?.id || "",
+    email: userDetails?.email || "",
+    first_name: userDetails?.first_name || "",
+    last_name: userDetails?.last_name || "",
+    avatar: userDetails?.avatar || "",
   });
 
-useEffect(() => {
-  if (userDetails) {
-    setEditFormData(userDetails); 
+  useEffect(() => {
+    if (userDetails) {
+      setEditFormData(userDetails); 
+    }
+  }, [userDetails]);
+
+  // ✅ سپس بررسی می‌کنیم که مقدار `userDetails` قابل قبول است
+  if (!userDetails) {
+    return null;
   }
-}, [userDetails]);
-
- 
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditFormData({ ...editFormData, [event.target.name]: event.target.value });
   };
 
-const handleSaveChanges = () => {
-  console.log("Updating user...");
-  setTimeout(() => {
-    onSubmit(editFormData);
-    onClose();
-  }, 100); // ✅ تأخیر بسیار کم برای جلوگیری از lag در رویداد
-};
-
+  const handleSaveChanges = () => {
+    console.log("Updating user...");
+    setTimeout(() => {
+      onSubmit(editFormData);
+      onClose();
+    }, 100);
+  };
 
   return (
-   <Dialog open={Boolean(isOpen)} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog open={Boolean(isOpen)} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle className="bg-green-500 text-white text-lg font-semibold text-right">
         ویرایش اطلاعات کاربر
       </DialogTitle>
       <DialogContent className="p-6 flex flex-col gap-6">
         <div className="flex justify-center">
-          <Avatar src={editFormData.avatar} alt={editFormData.email} className="w-44 h-44 mb-6 border-4 border-gray-400 rounded-full" />
+          <Avatar 
+            src={editFormData.avatar} 
+            alt={editFormData.email} 
+            className="w-44 h-44 mb-6 border-4 border-gray-400 rounded-full" 
+          />
         </div>
 
         <TextField 
