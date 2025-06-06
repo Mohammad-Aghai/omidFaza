@@ -35,7 +35,7 @@ export const userSignin = createAsyncThunk("users/userSignin", async (user: { em
 
 
 // Register user
-export const userRegister = createAsyncThunk("users/userRegister", async (user: { id: string, email: string, password: string }, { rejectWithValue }) => {
+export const userRegister = createAsyncThunk("users/userRegister", async (user: {  email: string, password: string }, { rejectWithValue }) => {
   try {
     return await signUpUserApi(user);
   } catch (error) {

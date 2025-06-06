@@ -4,22 +4,31 @@ import Image from 'next/image'
 import logo from "@/public/images/logo.svg"
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
-import { User } from '@/redux/usersSlice'
+import { User, userRegister, userSignin } from '@/redux/usersSlice'
 import { AppDispatch } from '@/redux/store'
 import { IsLogin, UserLoginContext } from '@/contexts/IsUserLogin'
 import { useRouter } from "next/navigation";
 import swal from 'sweetalert'
+import { RootState } from '@reduxjs/toolkit/query'
 export type FormModal = {
   formTitle: string;
   switchPage: string;
   linkHref: string;
   linkContent: string;
-  formAction: any
+  formAction: (user: User) => Promise<unknown>;
 };
-const FormModal: React.FC<FormModal> = ({ formTitle, switchPage, linkHref, linkContent, formAction }) => {
+export type FormModalProps = {
+  formTitle: string;
+  switchPage: string;
+  linkHref: string;
+  linkContent: string;
+  // اکنون formAction همان نوع thunk action را برمی‌گرداند
+  formAction: (user: User) => ReturnType<typeof userSignin | typeof userRegister>;
+};
+const FormModal: React.FC<FormModalProps> = ({ formTitle, switchPage, linkHref, linkContent, formAction }) => {
   const router = useRouter()
   const isLoginContext = useContext<UserLoginContext | null>(IsLogin)
-  const loginResponse = useSelector((state: any) => state.users)
+  const loginResponse = useSelector((state: any) => state.users);
   const dispatch = useDispatch<AppDispatch>()
   const [loginFormInfo, setLoginFormInfo] = useState<User>({ email: "", password: "" })
 

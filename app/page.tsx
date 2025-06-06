@@ -9,7 +9,7 @@ export default async  function Home() {
        <Users/> 
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <h3>footer</h3>
+        <h3>ساخته شده توسط محمد آقائی</h3>
       
       </footer>
     </>
