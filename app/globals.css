@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "vazir";
+  src: url("/fonts/Vazir-Regular.woff2") format("woff2"),
+       url("/fonts/Vazir-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --firstBackground : var(--color-slate-700);
+  --firstColor : var(--color-white);
+  --linkColor  : var(--text-indigo-300)
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "vazir", Arial, Helvetica, sans-serif;
+  background-color: var(--firstBackground) !important;
+  color: var(--firstColor) !important;
 }
+.btn__404{
+     width: 200px;
+}
+
+
+/* modal info */
+.infoModal{
+  position: absolute;
+}
+.modalUserInfo__title{
+  font-family: "vazir",Arial, Helvetica, sans-serif !important;
+}
+.modalUserInfo__profile{
+width: 100px !important;
+height: 100px !important;
+margin-top: 10px;
+}
+
