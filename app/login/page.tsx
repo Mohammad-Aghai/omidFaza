@@ -8,8 +8,7 @@ import FormModal from '../components/FormModal'
 
 
 const LoginPage = () => {
-  const isLogin = useContext<UserLoginContext | null>(IsLogin)
-
+ 
 
   return (
     <div className='relative flex justify-center'>

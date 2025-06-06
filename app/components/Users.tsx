@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, } from "../../redux/store"
-import { getUsers, addUser, updateUser, UserState, deleteUser } from '@/redux/usersSlice';
+import { getUsers , UserState, deleteUser } from '@/redux/usersSlice';
 import { deleteUserLocally ,updateUserLocally} from '@/redux/usersSlice';
 import { IsLogin, UserLoginContext } from '@/contexts/IsUserLogin'
 import swal from 'sweetalert'
