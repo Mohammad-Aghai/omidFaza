@@ -1,8 +1,5 @@
 "use client"
 import React from 'react'
-import { useContext } from 'react'
-import { IsLogin } from '@/contexts/IsUserLogin'
-import { UserLoginContext } from '@/contexts/IsUserLogin'
 import { userSignin } from '@/redux/usersSlice'
 import FormModal from '../components/FormModal'
 
