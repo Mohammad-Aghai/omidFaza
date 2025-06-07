@@ -1,5 +1,4 @@
 @import "tailwindcss";
-
 @font-face {
   font-family: "vazir";
   src: url("/fonts/Vazir-Regular.woff2") format("woff2"),
@@ -15,20 +14,14 @@
 .bg-customGreen {
   background-color: #00ff00;
 }
-
-
 body {
   font-family: "vazir", Arial, Helvetica, sans-serif;
-  background-color: #374151;
+  background-color: var(--firstBackground) !important;
   color: var(--firstColor) !important;
 }
 .btn__404{
      width: 200px;
 }
-.main__Background{
-
-}
-
 /* modal info */
 .infoModal{
   position: absolute;
@@ -45,19 +38,19 @@ margin-top: 10px;
   background: #000;
 }
 .bg-lime-100 {
-    background-color: oklch(96.7% .067 122.328) !important;
+    background-color:#ecfcca !important;
 }
 .bg-lime-200 {
-    background-color: oklch(93.8% .127 124.321) !important;
+    background-color:#d8f999 !important;
 }
 .bg-lime-300 {
-    background-color: oklch(89.7% .196 126.665) !important;
+    background-color:#bbf451 !important;
 }
 .bg-lime-400 {
-    background-color: oklch(84.1% .238 128.85) !important;
+    background-color:#9ae600 !important;
 }
 .bg-slate-900{
-  background-color: #374151 !important;
+  background-color: var(--firstBackground) !important;
 }
 .action__btns{
   margin: 0 5px !important;
