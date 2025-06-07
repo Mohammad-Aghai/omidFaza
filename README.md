@@ -1,3 +1,8 @@
+Description: This project is developed using NextJS and Redux. As mentioned, all CRUD operations are implemented in this project. Create on the registration and login page. 
+Read, Delete, Update on the main page of the user list. 
+Due to the fake information and the lack of changes to the user data on the API side, in addition to performing operations with the API, the operations are also performed locally and all actions work in the output. 
+Regarding the login and registration page, due to the fake API and the return of only one user from the API, login and register only with the username 
+eve.holt@reqres.in
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
