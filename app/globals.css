@@ -50,7 +50,19 @@ margin-top: 10px;
     background-color:#9ae600 !important;
 }
 .bg-slate-900{
-  background-color: var(--firstBackground) !important;
+  background-color: #1d1c1ccc !important;
+}
+.bg-blue-600{
+  background-color: #155dfc !important;
+}
+.text-gray-900{
+  color: #101828;
+}
+.bg-indigo-600{
+background-color: #4f39f6 !important;
+}
+.text-indigo-300{
+  color: #a3b3ff !important;
 }
 .action__btns{
   margin: 0 5px !important;
