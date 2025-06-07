@@ -8,19 +8,26 @@
   font-style: normal;
 }
 :root {
-  --firstBackground : var(--color-slate-700);
-  --firstColor : var(--color-white);
-  --linkColor  : var(--text-indigo-300)
+  --firstBackground: #374151; /* slate-700 */
+  --firstColor: #ffffff; /* white */
+  --linkColor: #818cf8; /* indigo-300 */
 }
+.bg-customGreen {
+  background-color: #00ff00;
+}
+
+
 body {
   font-family: "vazir", Arial, Helvetica, sans-serif;
-  background-color: var(--firstBackground) !important;
+  background-color: #374151;
   color: var(--firstColor) !important;
 }
 .btn__404{
      width: 200px;
 }
+.main__Background{
 
+}
 
 /* modal info */
 .infoModal{
@@ -34,4 +41,24 @@ width: 100px !important;
 height: 100px !important;
 margin-top: 10px;
 }
-
+.formModal__bg{
+  background: #000;
+}
+.bg-lime-100 {
+    background-color: oklch(96.7% .067 122.328) !important;
+}
+.bg-lime-200 {
+    background-color: oklch(93.8% .127 124.321) !important;
+}
+.bg-lime-300 {
+    background-color: oklch(89.7% .196 126.665) !important;
+}
+.bg-lime-400 {
+    background-color: oklch(84.1% .238 128.85) !important;
+}
+.bg-slate-900{
+  background-color: #374151 !important;
+}
+.action__btns{
+  margin: 0 5px !important;
+}

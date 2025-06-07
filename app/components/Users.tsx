@@ -2,8 +2,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, } from "../../redux/store"
-import { getUsers , UserState, deleteUser } from '@/redux/usersSlice';
-import { deleteUserLocally ,updateUserLocally} from '@/redux/usersSlice';
+import { getUsers, UserState, deleteUser } from '@/redux/usersSlice';
+import { deleteUserLocally, updateUserLocally } from '@/redux/usersSlice';
 import { IsLogin, UserLoginContext } from '@/contexts/IsUserLogin'
 import swal from 'sweetalert'
 import { useRouter } from 'next/navigation'
@@ -27,16 +27,17 @@ import UserEditModal from './UserUpdateModal';
 interface Column {
   id: "id" | "نام" | "ایمیل" | "پروفایل" | "عملیات";
   label: string;
-  minWidth?: number;
+  minWidth?: { xs: number, md: number };
   align?: "right";
 }
 const columns: readonly Column[] = [
-  { id: "id", label: "ID", minWidth: 50, align: "right" },
-  { id: "نام", label: "نام", minWidth: 170, align: "right" },
-  { id: "ایمیل", label: "ایمیل", minWidth: 200, align: "right" },
-  { id: "پروفایل", label: "پروفایل", minWidth: 100, align: "right" },
-  { id: "عملیات", label: "عملیات", minWidth: 170, align: "right" },
+  { id: "id", label: "ID", minWidth: { xs: 90, md: 100 }, align: "right" },
+  { id: "نام", label: "نام", minWidth: { xs: 130, md: 170 }, align: "right" },
+  { id: "ایمیل", label: "ایمیل", minWidth: { xs: 160, md: 200 }, align: "right" },
+  { id: "پروفایل", label: "پروفایل", minWidth: { xs: 60, md: 100 }, align: "right" },
+  { id: "عملیات", label: "عملیات", minWidth: { xs: 130, md: 170 }, align: "right" },
 ];
+
 export interface UserData {
   id: number | string;
   email: string;
@@ -86,7 +87,7 @@ export const Users = () => {
         icon: "error",
       });
     }
-  },  [dispatch, LoginContext, router, usersData?.error]); 
+  }, [dispatch, LoginContext, router, usersData?.error]);
   //mui table logic
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(2); // Show 2 users per page
@@ -101,17 +102,17 @@ export const Users = () => {
   };
   // Actions 
   //update
-const openEditModal = (user: UserData) => {
-  setSelectedUserToEdit(user);
-  setEditModalOpen(true);
-};
-const handleUserUpdate = (updatedUser: UserData) => {
-  console.log("کاربر بروزرسانی شد:", updatedUser);
-  
-   dispatch(updateUserLocally(updatedUser)); 
-};
-//delete
-  const handleDelete = (userId: number  | string) => {
+  const openEditModal = (user: UserData) => {
+    setSelectedUserToEdit(user);
+    setEditModalOpen(true);
+  };
+  const handleUserUpdate = (updatedUser: UserData) => {
+    console.log("کاربر بروزرسانی شد:", updatedUser);
+
+    dispatch(updateUserLocally(updatedUser));
+  };
+  //delete
+  const handleDelete = (userId: number | string) => {
     dispatch(deleteUser(userId))
     dispatch(deleteUserLocally(userId));
   };
@@ -122,19 +123,29 @@ const handleUserUpdate = (updatedUser: UserData) => {
   };
 
   //reload
-  const reloadPageHandler = ()=>{
-      window.location.reload();
+  const reloadPageHandler = () => {
+    window.location.reload();
   }
   return (
     <div className='container'>
       <Paper sx={{ width: "100%", overflow: "hidden" }} >
-         <button className='m-5 cursor-pointer bg-blue-600 px-5 py-2 rounded-2xl text-white'  onClick={reloadPageHandler}>بازنشانی</button>
+        <button className='m-5 cursor-pointer bg-blue-600 px-5 py-2 rounded-2xl text-white' onClick={reloadPageHandler}>بازنشانی</button>
         <TableContainer sx={{ direction: "rtl", maxHeight: 440 }}>
           <Table stickyHeader aria-label="rtl table">
             <TableHead>
-              <TableRow className='bg-lime-500 '>
+              <TableRow className="bg-lime-500">
                 {columns.map((column) => (
-                  <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    sx={{
+                      fontSize: { xs: "12px", md: "16px" },
+                      minWidth: column.minWidth
+                        ? { xs: column.minWidth.xs - 40, md: column.minWidth.md }
+                        : undefined,
+                      wordBreak: "break-word",
+                    }}
+                  >
                     {column.label}
                   </TableCell>
                 ))}
@@ -143,17 +154,17 @@ const handleUserUpdate = (updatedUser: UserData) => {
             <TableBody>
               {LoginContext?.isLogin ? newUsersData && newUsersData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((user: UserData) => (
                 <TableRow hover role="checkbox" tabIndex={-1} key={user.id}>
-                  <TableCell align="right" className='bg-lime-100 '>{user.id}</TableCell>
-                  <TableCell align='right' className='bg-lime-200' >{`${user.first_name} ${user.last_name}`}</TableCell>
-                  <TableCell align='right' className='bg-lime-300' >{user.email}</TableCell>
-                  <TableCell align="right" className='bg-lime-400' >
+                  <TableCell sx={{ fontSize: { xs: '9px', md: '16px' }, wordBreak: "break-word" }} align="right" className='bg-lime-100 '>{user.id}</TableCell>
+                  <TableCell sx={{ fontSize: { xs: '9px', md: '16px' }, wordBreak: "break-word" }} align='right' className='bg-lime-200' >{`${user.first_name} ${user.last_name}`}</TableCell>
+                  <TableCell sx={{ fontSize: { xs: '9px', md: '16px' }, wordBreak: "break-word" }} align='right' className='bg-lime-300' >{user.email}</TableCell>
+                  <TableCell sx={{ fontSize: { xs: '9px', md: '16px' }, wordBreak: "break-word" }} align="right" className='bg-lime-400' >
                     <Avatar src={user.avatar} alt={user.first_name} />
                   </TableCell>
-                  <TableCell align="right" className='bg-lime-100'>
-                    <Stack direction="row" className='gap-2'>
-                      <Button variant="outlined" color="primary" onClick={() => openEditModal(user)}>ویرایش</Button>
-                      <Button variant="outlined" color="success" onClick={() => handleMoreInfo(user)}>اطلاعات کاربر</Button>
-                      <Button variant="outlined" color="error" onClick={() => handleDelete(user.id)}>حذف</Button>
+                  <TableCell sx={{ fontSize: { xs: '9px', md: '16px' }, wordBreak: "break-word" }} align="right" className='bg-lime-100'>
+                    <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
+                      <Button sx={{ fontSize: { xs: '9px', md: '16px'  }}} className='action__btns' variant="outlined" color="primary" onClick={() => openEditModal(user)}>ویرایش</Button>
+                      <Button sx={{ fontSize: { xs: '9px', md: '16px'  }}} className='action__btns' variant="outlined" color="success" onClick={() => handleMoreInfo(user)}>اطلاعات کاربر</Button>
+                      <Button sx={{ fontSize: { xs: '9px', md: '16px'  }}} className='action__btns' variant="outlined" color="error" onClick={() => handleDelete(user.id)}>حذف</Button>
                     </Stack>
                   </TableCell>
                 </TableRow>
@@ -184,7 +195,7 @@ const handleUserUpdate = (updatedUser: UserData) => {
         />
       </Paper>
       <UserInfoModal open={modalOpen} onClose={() => setModalOpen(false)} user={selectedUser!} />
-     <UserEditModal isOpen={editModalOpen} onClose={() => setEditModalOpen(false)} userDetails ={selectedUserToEdit!} onSubmit={handleUserUpdate} />
+      <UserEditModal isOpen={editModalOpen} onClose={() => setEditModalOpen(false)} userDetails={selectedUserToEdit!} onSubmit={handleUserUpdate} />
     </div>
   )
 }

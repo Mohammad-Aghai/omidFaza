@@ -77,7 +77,7 @@ const FormModal: React.FC<FormModalProps> = ({ formTitle, switchPage, linkHref, 
 
   return (
 
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-5 lg:px-10  absolute bg-slate-900 rounded-2xl  mt-10 " >
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-5 lg:px-10  absolute bg-slate-900 rounded-2xl  mt-10 formModal__bg" >
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Image src={logo} alt='site-logo' width={200} height={200} className='mx-auto' />
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight">
